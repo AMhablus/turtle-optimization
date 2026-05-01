@@ -1,7 +1,7 @@
 # Problem settings
-N = 30
-dim = 2
-bounds = (-5, 5)
+N = 50
+dim = 1
+bounds = (-10, 10)
 T = 100
 
 # TIOA parameters
@@ -15,3 +15,6 @@ parameters = {
     "k_min": 3,
     "T_m": 10
 }
+
+# mode options: "sphere", "rosenbrock", "rastrigin", "ackley"
+mode = "sphere"

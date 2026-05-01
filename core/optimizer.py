@@ -5,7 +5,7 @@ from tioa.movement import compute_direction, compute_migration, compute_update
 from tioa.dynamics import compute_step_size, compute_exploration
 from utils.helpers import random_vector, clip_to_bounds
 
-def optimize(N, dim, bounds, T, objective_function, parameters):
+def optimize(N, dim, bounds, T, objective_function, mode, parameters):
     """
         N: population size
         dim: sample dimension
@@ -29,7 +29,7 @@ def optimize(N, dim, bounds, T, objective_function, parameters):
     fitness = np.zeros(N)
     
     for i in range(N):
-        fitness[i] = objective_function(positions[i])
+        fitness[i] = objective_function(positions[i], mode)
     
     pbest_positions, pbest_fitness = initialize_pbest(positions, fitness)
 
@@ -38,6 +38,8 @@ def optimize(N, dim, bounds, T, objective_function, parameters):
     f_best = fitness[best_idx]
 
     for t in range(T):
+        print(f"Iteration {t+1}/{T}, Best Fitness: {f_best}\n")
+
         for i in range(N):
 
             x_i = positions[i]
@@ -48,7 +50,7 @@ def optimize(N, dim, bounds, T, objective_function, parameters):
             # Identify neighboring turtles based on spatial proximity
             # neighbors = {j | distance(Xi, Xj) < threshold}
             # These neighbors influence direction and step size    
-            neighbors = get_neighbors(i, positions, alpha, k_min)
+            neighbors = get_neighbors(i, positions, alpha, k_min)   
 
              # --------------------------------------------------
             # 2) Direction Vector (Social Influence)
@@ -121,7 +123,7 @@ def optimize(N, dim, bounds, T, objective_function, parameters):
             # 9) Fitness Evaluation
             # --------------------------------------------------
             # Evaluate new solution
-            fitness[i] = objective_function(x_i)
+            fitness[i] = objective_function(x_i, mode)
 
             # --------------------------------------------------
             # 10) Personal Best Update
