@@ -1,9 +1,12 @@
+import numpy as np
+
 # --------------------------------------------------
 # Compute Direction function
 # --------------------------------------------------
 # Purpose:
 # Move toward the average position of neighbors.
-#
+
+
 # Equation:
 # D_i = mean(X_neighbors) - X_i
 #
@@ -17,9 +20,22 @@
 #
 # Edge Case:
 # If no neighbors → return zero vector
-#
+
 # Output:
 # Direction vector of shape (dim,)
+def compute_direction(i, neighbors, positions):
+
+    if len(neighbors) == 0:
+        return np.zeros_like(positions[i])
+
+    X_i = positions[i]                  # shape (dim,)
+    X_neighbors = positions[neighbors]  # shape (k, dim)
+
+    mean_neighbors = np.mean(X_neighbors, axis=0)
+
+    D_i = mean_neighbors - X_i
+
+    return D_i
 
 
 
@@ -46,7 +62,10 @@
 # Output:
 # Migration vector of shape (dim,)
 
-
+def compute_migration(x_i, X_best, pbest_positions, i, mu, nu):
+     X_pbest = pbest_positions[i]
+     M_i = (mu*(X_best - x_i)) + (nu* (X_pbest - x_i))
+     return M_i
 
 
 # --------------------------------------------------
@@ -75,3 +94,7 @@
 #
 # Output:
 # ΔX_i (vector of shape (dim,))
+
+def compute_update(x_i, S_i, D_i, E_i, R_i, M_i):
+    delta_X = (S_i * D_i) + (E_i * R_i) + M_i
+    return delta_X
