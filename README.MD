@@ -1,4 +1,4 @@
-# 🐢 Turtle Inspired Optimization Algorithm (TIOA) – Full Project Guide
+# 🐢 Turtle Inspired Optimization Algorithm (TIOA)
 
 ---
 
@@ -12,10 +12,6 @@ This document explains:
 * Data shapes and consistency rules
 * Integration rules between teammates
 
-This ensures:
-✔ No conflicts
-✔ Clear understanding
-✔ Consistent implementation
 
 ---
 
@@ -269,51 +265,5 @@ Push toward:
 # 🧠 7. COMPLETE UPDATE EQUATION
 
 X_i = X_i + S_i D_i + E_i R_i + M_i
-
----
-
-# 🧠 8. FUNCTION CONTRACTS (IMPORTANT)
-
-Each function must respect:
-
----
-
-compute_direction
-Input: (i, neighbors, positions)
-Output: (dim,)
-
----
-
-compute_step_size
-Input: (i, neighbors, fitness, S_max, k)
-Output: scalar
-
----
-
-compute_exploration
-Input: (t, T, E0)
-Output: scalar
-
----
-
-compute_migration
-Input: (X_i, X_best, X_pbest, mu, nu)
-Output: (dim,)
-
----
-
-compute_update
-Input: vectors + scalars
-Output: (dim,)
-
----
-
-# ⚠️ 9. COMMON ERRORS TO AVOID
-
-❌ Shape mismatch
-❌ Returning scalar instead of vector
-❌ Modifying original arrays unintentionally
-❌ Empty neighbors without handling
-❌ Forgetting bounds
 
 ---
